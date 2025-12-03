@@ -1,10 +1,12 @@
+
 import { TestData } from "../types";
 import { calculateLocomoLevel } from "../utils/logic";
 import { STAND_UP_OPTIONS } from "../constants";
 
 // Google Apps Script Web App URL
-// 安全な環境変数アクセス：processが未定義の環境(ブラウザ直接実行など)でもクラッシュしないようにする
-const GAS_URL = (typeof process !== 'undefined' && process.env && process.env.NEXT_PUBLIC_GAS_URL) || "https://script.google.com/macros/s/AKfycbxdcAHOT7FS_Cip5p0lugTbv2oTXMzvnv-4KJysna_ibx9K19_10xn85rO4R2LFXH00/exec";
+// Vite環境では import.meta.env.VITE_GAS_URL を使用します
+// Vercel等の環境変数で VITE_GAS_URL を設定していない場合は、デフォルトのURLが使用されます
+const GAS_URL = import.meta.env.VITE_GAS_URL || "https://script.google.com/macros/s/AKfycbxdcAHOT7FS_Cip5p0lugTbv2oTXMzvnv-4KJysna_ibx9K19_10xn85rO4R2LFXH00/exec";
 
 // --- Helper Functions for Risk/Severity ---
 
