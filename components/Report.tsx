@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import type { CSSProperties } from "react";
 import { TestData } from "../types";
@@ -17,7 +16,7 @@ interface ReportProps {
 }
 
 // 解説動画のURL設定（PDFにのみ表示）
-const YOUTUBE_URL = "https://www.youtube.com/watch?v=lGlh4LhFWjs";
+const YOUTUBE_URL = "https://youtu.be/lGlh4LhFWjs?si=y5DNa8GJkJxwj4IQ";
 // QRコード生成API (外部サービスを使用)
 const QR_CODE_API = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&bgcolor=ffffff&data=${encodeURIComponent(YOUTUBE_URL)}`;
 
