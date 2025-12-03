@@ -1,11 +1,9 @@
-// Manually define ImportMetaEnv to support import.meta.env usage
+// Removed reference to "vite/client" to fix "Cannot find type definition file" error.
+// Manually defined ImportMeta and ImportMetaEnv for environment variable typing.
+
 interface ImportMetaEnv {
   readonly VITE_GAS_URL?: string;
-  readonly BASE_URL: string;
-  readonly MODE: string;
-  readonly DEV: boolean;
-  readonly PROD: boolean;
-  readonly SSR: boolean;
+  readonly [key: string]: string | boolean | undefined;
 }
 
 interface ImportMeta {

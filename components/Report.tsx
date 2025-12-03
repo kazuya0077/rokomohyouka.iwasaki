@@ -5,7 +5,7 @@ import { TestData } from "../types";
 import { calculateLocomoLevel, getAdvice } from "../utils/logic";
 import { sendDataToGAS } from "../services/gasService";
 import { STAND_UP_OPTIONS } from "../constants";
-import { RotateCcw, CloudUpload, CheckCircle, Loader2, Download, Eye } from "lucide-react";
+import { RotateCcw, UploadCloud, CheckCircle, Loader2, Download, Eye } from "lucide-react";
 // @ts-ignore
 import html2canvas from "html2canvas";
 // @ts-ignore
@@ -183,7 +183,7 @@ export const Report: React.FC<ReportProps> = ({ data, onRestart }) => {
               </>
             ) : (
               <>
-                <CloudUpload size={20} />
+                <UploadCloud size={20} />
                 <span>結果を保存する</span>
               </>
             )}
