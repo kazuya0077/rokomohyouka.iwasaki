@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import type { CSSProperties } from "react";
 import { TestData } from "../types";
@@ -495,7 +496,7 @@ export const Report: React.FC<ReportProps> = ({ data, onRestart }) => {
                 🎥 動画で解説を見る
               </div>
               <div style={{ fontSize: 10, color: "#475569", lineHeight: 1.4, marginBottom: 4 }}>
-                右のQRコードをスマートフォンで読み取ると、理学療法士による詳しい解説動画をご覧いただけます。
+                右のQRコードをスマートフォンで読み取ると、ロコモトレーニングの動画をご覧いただけます。
               </div>
               <div style={{ fontSize: 9, color: "#94A3B8", fontFamily: "monospace" }}>
                 {YOUTUBE_URL}
