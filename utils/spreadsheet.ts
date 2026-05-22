@@ -6,13 +6,14 @@ const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx3dfRsPBk_9oyx
 export interface SpreadsheetData {
     date: string;           // 日時
     name: string;           // 氏名
-    age: number | string;   // 年齢（現在のフォームにはないので空文字対応）
+    age: number | string;   // 年齢
     gender: string;         // 性別
     height: number;         // 身長
     standUpScore: number;   // 立ち上がりスコア（ロコモ度）
     twoStepScore: number;   // 2ステップスコア（値）
     locomo25Score: number;  // ロコモ25点数
     locomoLevel: number;    // 判定レベル（最終ロコモ度）
+    locomo25Answers: (number | null)[]; // ロコモ25 Q1〜Q25の個別回答
 }
 
 /**
@@ -22,18 +23,14 @@ export const sendToSpreadsheet = async (data: SpreadsheetData): Promise<{ result
     try {
         await fetch(GAS_WEB_APP_URL, {
             method: 'POST',
-            mode: 'no-cors', // CORSを回避（GASはno-corsモードが必要な場合がある）
+            mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain;charset=utf-8',
             },
             body: JSON.stringify(data),
         });
 
         // no-corsモードの場合、レスポンスは読み取れないため成功とみなす
-        // CORSが設定されている場合は以下のコードを使用
-        // const result = await response.json();
-        // return result;
-
         return { result: 'success' };
     } catch (error) {
         console.error('スプレッドシート送信エラー:', error);
