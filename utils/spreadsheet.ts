@@ -1,7 +1,9 @@
 // スプレッドシート送信用のユーティリティ
 
-// GASウェブアプリのURL（デプロイ後に設定してください）
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx3dfRsPBk_9oyxFUXr4bnYxsce1iJKvBjVxUbf0uUr15tOroVVY1b4aPOvAZ_UZTov/exec';
+// GASウェブアプリのURL
+const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/' +
+    'AKfycbzyF9HlfVf3ev9OpR09RtNxp0qoz26gCeHRRpW8Fgxu4roMDK0PvvauTi5ovU31Sjc5' +
+    '/exec';
 
 export interface SpreadsheetData {
     date: string;           // 日時
