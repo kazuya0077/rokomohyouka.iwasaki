@@ -197,6 +197,7 @@ const App: React.FC = () => {
         twoStepScore: result.twoStepValue,
         locomo25Score: result.locomo25Score,
         locomoLevel: result.finalDegree,
+        locomo25Answers: state.locomo25Answers,
       };
 
       const response = await sendToSpreadsheet(data);
