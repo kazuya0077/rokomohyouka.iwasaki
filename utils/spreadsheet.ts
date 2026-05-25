@@ -1,9 +1,7 @@
 // スプレッドシート送信用のユーティリティ
 
-// GASウェブアプリのURL
-const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/' +
-    'AKfycbzyF9HlfVf3ev9OpR09RtNxp0qoz26gCeHRRpW8Fgxu4roMDK0PvvauTi5ovU31Sjc5' +
-    '/exec';
+const GAS_SCRIPT_ID = 'AKfycbzazOWbtccU3INdbzPJVa3e38CP6XjChuxSg2SAgReogZ68pMtEkzd-0DEEaGBP417q';
+const GAS_WEB_APP_URL = `https://script.google.com/macros/s/${GAS_SCRIPT_ID}/exec`;
 
 export interface SpreadsheetData {
     date: string;           // 日時
@@ -12,6 +10,8 @@ export interface SpreadsheetData {
     gender: string;         // 性別
     height: number;         // 身長
     standUpScore: number;   // 立ち上がりスコア（ロコモ度）
+    standUpDetail?: string; // 立ち上がり詳細
+    standUpReason?: string; // 立ち上がり判定理由
     twoStepScore: number;   // 2ステップスコア（値）
     locomo25Score: number;  // ロコモ25点数
     locomoLevel: number;    // 判定レベル（最終ロコモ度）
