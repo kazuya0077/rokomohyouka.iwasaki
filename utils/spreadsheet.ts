@@ -1,8 +1,8 @@
 // スプレッドシート送信用のユーティリティ
 
 const GAS_SCRIPT_ID = [
-    'AKfycbyzw2hMLhYDNYUS1KeyOZo30rfGvJozz80bFlAJd5cYl_',
-    '-KXeKLbL8v6hTuoITV4eJF'
+    'AKfycby_HgY3fbJ_pgc9g9BjQVliwQplTzSN8QhBuljDDkW_',
+    'IbCVLyXh_e5U-KsDjnbGekA4'
 ].join('');
 const GAS_WEB_APP_URL = `https://script.google.com/macros/s/${GAS_SCRIPT_ID}/exec`;
 
