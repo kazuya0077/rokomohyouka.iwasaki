@@ -187,18 +187,20 @@ const App: React.FC = () => {
     setSendResult(null);
 
     try {
-      const data: SpreadsheetData = {
+      const data = {
         date: getCurrentDateTime(),
         name: state.basicInfo.userName,
         age: state.basicInfo.age || '',
         gender: state.basicInfo.gender === 'male' ? '男性' : '女性',
         height: state.basicInfo.heightCm,
         standUpScore: result.standUpDegree,
+        standUpDetail: result.standUpReason,
+        standUpReason: result.standUpReason,
         twoStepScore: result.twoStepValue,
         locomo25Score: result.locomo25Score,
         locomoLevel: result.finalDegree,
         locomo25Answers: state.locomo25Answers,
-      };
+      } as SpreadsheetData & { standUpDetail: string; standUpReason: string };
 
       const response = await sendToSpreadsheet(data);
 
