@@ -3,10 +3,10 @@ import { LocomoDegree, StandUpTest, TwoStepTest, Locomo25Answers, CalculationRes
 
 /**
  * 立ち上がりテストのロコモ度判定
- * 
+ *
  * 前提A: 「Min」は「成功した中で最も低い台」を指す。
  * 例: bothMin = '30cm' は「30cmは成功したが、20cmは失敗した（または未実施）」を意味する。
- * 
+ *
  * 判定フロー:
  * Step 0: 左右とも片脚で40cmが可能（またはそれより低い台が可能）なら、ロコモ度0。
  * Step 1: 片脚が左右どちらか一方でも「不可(impossible)」または「未実施(untested)」の場合、両脚テストで判定。
@@ -18,53 +18,51 @@ import { LocomoDegree, StandUpTest, TwoStepTest, Locomo25Answers, CalculationRes
 export const calculateStandUpDegree = (test: StandUpTest): { degree: LocomoDegree; reason: string } => {
     const { bothMin, singleRightMin, singleLeftMin } = test;
 
-    // 表示用テキスト生成ヘルパー
-    const fmt = (val: string) => {
-        if (val === 'impossible') return '不可';
-        if (val === 'untested') return '未実施';
-        return val;
-    };
-
     // 片脚テストの成功判定
     // '10cm'～'40cm' のいずれかが入っていれば「少なくとも40cmからは立てる」とみなして成功とする
     const isSingleSuccess = (val: string) => ['10cm', '20cm', '30cm', '40cm'].includes(val);
+
+    const getCmNumber = (val: string): number => {
+        const parsed = Number(String(val).replace('cm', ''));
+        return Number.isFinite(parsed) ? parsed : 40;
+    };
 
     const rightOk = isSingleSuccess(singleRightMin);
     const leftOk = isSingleSuccess(singleLeftMin);
 
     // --- Step 0: ロコモ度 0 の判定 ---
-    // 「左右とも片脚40㎝（以上）が可能な場合ロコモ度0」
+    // 左右とも片脚で成功している場合は、左右のうち能力が低い側（数値が大きい側）を代表値として記録する
     if (rightOk && leftOk) {
-        // 左右の内訳を理由に含める（ユーザー要望の「結果は悪い方」が視覚的にわかるように）
+        const worstSingleCm = Math.max(getCmNumber(singleRightMin), getCmNumber(singleLeftMin));
         return {
             degree: 0,
-            reason: `片脚40cmクリア (右:${fmt(singleRightMin)}, 左:${fmt(singleLeftMin)})`
+            reason: `${worstSingleCm}cm片脚起立可能`
         };
     }
 
     // --- Step 1: 片脚NG（どちらか一方でも不可）の場合、両脚の結果で判定 ---
-    const singleDetail = `(片脚 右:${fmt(singleRightMin)}, 左:${fmt(singleLeftMin)})`;
+    // スプレッドシート保存時に誤読されないよう、片脚情報を同じ文字列に混ぜない
 
     // ロコモ度 3
     if (bothMin === 'impossible') {
-        return { degree: 3, reason: `両脚40cm不可 ${singleDetail}` };
+        return { degree: 3, reason: '40cm両脚起立不可' };
     }
     if (bothMin === '40cm') {
-        return { degree: 3, reason: `両脚40cm止まり ${singleDetail}` };
+        return { degree: 3, reason: '40cm両脚起立可能' };
     }
 
     // ロコモ度 2
     if (bothMin === '30cm') {
-        return { degree: 2, reason: `両脚30cm止まり ${singleDetail}` };
+        return { degree: 2, reason: '30cm両脚起立可能' };
     }
 
     // ロコモ度 1
     if (bothMin === '20cm' || bothMin === '10cm') {
-        return { degree: 1, reason: `両脚${bothMin}クリア ${singleDetail}` };
+        return { degree: 1, reason: `${bothMin}両脚起立可能` };
     }
 
     // フォールバック
-    return { degree: 3, reason: "判定不能（入力不足）" };
+    return { degree: 3, reason: '判定不能（入力不足）' };
 };
 
 /**
