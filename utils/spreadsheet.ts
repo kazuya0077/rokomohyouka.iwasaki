@@ -1,6 +1,9 @@
 // スプレッドシート送信用のユーティリティ
 
-const GAS_SCRIPT_ID = 'AKfycbzazOWbtccU3INdbzPJVa3e38CP6XjChuxSg2SAgReogZ68pMtEkzd-0DEEaGBP417q';
+const GAS_SCRIPT_ID = [
+    'AKfycbyzw2hMLhYDNYUS1KeyOZo30rfGvJozz80bFlAJd5cYl_',
+    '-KXeKLbL8v6hTuoITV4eJF'
+].join('');
 const GAS_WEB_APP_URL = `https://script.google.com/macros/s/${GAS_SCRIPT_ID}/exec`;
 
 export interface SpreadsheetData {
